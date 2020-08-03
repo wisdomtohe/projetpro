@@ -1,0 +1,31 @@
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY0MjAzNzIwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY0MjAzNzIwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcImFkbWluXCIsXCJsYXN0TmFtZVwiOlwiYWRtaW5cIixcInVzZXJOYW1lXCI6XCJhZG1pblwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwiYWRtaW5AaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.YoAzcseyuxNS9UMuWBMIRebBLSwLoB2vhFFSISZUYUbxtJLa2JqM9vMDJ6D8XMRrxp_8-te9E3pwOuLoatIhaw
+###
+
+POST /users/save
+Host: localhost:8080
+Content-Type: application/json
+
+{
+     "type" : "user",
+     "firstName" : "user2",
+     "lastName" : "user2",
+     "userName" : "user2",
+     "phone" : "99990416",
+     "email" : "user2@ipnet.tg",
+     "password" : "user2",
+     "role" : [{"id": 2}]
+}
+###
+
+POST /users/login
+Host: localhost:8080
+Content-Type: application/json
+
+{
+  "email" : "admin@ipnet.tg",
+  "password" : "admin",
+  "type" : "user"
+}
+###
+
+POST /

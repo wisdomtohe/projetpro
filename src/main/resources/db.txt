@@ -1,0 +1,139 @@
+Table users as U {
+  id int [pk, increment] // auto-increment
+  first_name varchar(100) [not null]
+  last_name varchar(150) [not null]
+  username varchar(30) [not null]
+  password varchar(50) [not null]
+  e_mail varchar(150) [not null, unique]
+  phone varchar(20) [not null, unique]
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int   [not null,note: 'Who changed', ref: > U.id]
+}
+
+Table student as ST {
+  id int [pk, increment]
+  id_user int [not null, ref: > U.id, note: 'Tells that a student is a user']
+  matricule varchar(10) [not null, unique]
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int   [not null,note: 'Who changed', ref: > U.id]
+}
+Table teacher as T{
+  id int [pk, increment]
+  id_user int [not null, ref: > U.id, note: 'Tells that a teacher is a user']
+  matricule varchar(10) [not null, unique]
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int   [not null,note: 'Who changed', ref: > U.id]
+}
+Table term as TE{
+  id int [pk, increment] 
+  code varchar(10) [not null, note: 'Term code. E.g S1'] 
+  name varchar(100) [not null, note: 'Term name. E.g Semestre 1'] 
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int   [not null,note: 'Who changed', ref: > U.id]
+}
+Table classe as CL{
+  id int [pk, increment]
+  name varchar(100) [not null, note: 'exemple: Genie Logiciel 1ere annee']
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int   [not null,note: 'Who changed', ref: > U.id]
+}
+Table subject as SB{
+  id int [pk, increment]
+  code varchar(10) [not null, unique, note:'course code. E.g CSC-394']
+  name varchar(100) [not null, note: 'exemple: Genie Logiciel 1ere annee']
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int   [not null,note: 'Who changed', ref: > U.id]
+}
+Table course as CO{
+  id int [pk, increment]
+  id_term int [not null, ref: > TE.id]
+  id_class int [not null, ref: > CL.id]
+  id_subject int [not null, ref: > SB.id]
+  id_teacher int [not null, ref: > T.id] 
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int   [not null,note: 'Who changed', ref: > U.id]
+}
+Table student_course {
+  id int [pk, increment]
+  id_course int [ref: > CO.id]
+  id_student int [ref: > ST.id]
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int   [not null,note: 'Who changed', ref: > U.id]
+}
+
+Table survey as SV{
+  id int [pk, increment]
+  id_course int [not null, ref: > CO.id]
+  title varchar(45) [not null, unique]
+  description text [not null]
+  begin_message text [note: 'Instruction avant de demarrer le survey']
+  end_message text [note: 'Message de fin du survey']
+  begin_date timestamp [not null, note: 'begining of the survey']
+  end_date timestamp [not null, note: 'end of the survey']
+  status tinyint [not null, note: 'Status of the survey 0=new, 1 active, 2-completed, 3-cancelled']
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int   [not null,note: 'Who changed', ref: > U.id]
+} 
+Table response as R{
+  id int [pk, increment]
+  id_survey int [not null, ref: > SV.id]
+  id_user int [not null, ref: > U.id]
+  id_qc int [not null, ref: > QC.id]
+  id_qt int [not null, ref: > QT.id]
+  id_qi int [not null, ref: > QI.id]
+  id_qr int [not null, ref: > QR.id]
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int [not null,note: 'Who changed', ref: > U.id]
+}
+Table q_on_course as QC{
+  id int [pk, increment]
+  clarte int  [not null]
+  compatibilite int  [not null]
+  coherence int  [not null]
+  support int  [not null]
+  ambiance int  [not null]
+  rythme int  [not null]
+  appreciation_generale int  [not null]
+  bool_comment boolean [not null]
+  comment text
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int [not null,note: 'Who changed', ref: > U.id]
+}
+Table q_on_teacher as QT{
+  id int [pk, increment]
+  relation_ee int [not null]
+  habilete int [not null]
+  capacite_ecoute int [not null]
+  disponibilite int [not null]
+  maitrise int [not null]
+  presentation_vesti int [not null]
+  appreciation_generale int [not null]
+  bool_comment boolean [not null]
+  comment text
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int [not null,note: 'Who changed', ref: > U.id]
+}
+Table q_infos as QI{
+  id int [pk, increment]
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int [not null,note: 'Who changed', ref: > U.id]
+}
+Table q_remarks as QR{
+  id int [pk, increment]
+  create_date_time timestamp [not null,note: 'When created']
+  mod_date_time timestamp [not null,note: 'When changed']
+  mod_by int [not null,note: 'Who changed', ref: > U.id]
+}

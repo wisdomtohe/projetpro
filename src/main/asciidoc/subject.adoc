@@ -1,0 +1,72 @@
+:toc: left
+:toc-interactive: // the active section will be highlighted
+:toc-mode: offcanvas
+= Documentation sur Le REST API
+
+* link:index.html[user]
+* link:classe.html[classe]
+* link:catSurvey.html[categorieSurvey]
+* link:term.html[Term]
+* link:subject.html[Subject]
+* link:question.html[Question]
+* link:course.html[Course]
+* link:studentSurvey.html[studentSurvey]
+
+RESTful notes tries to adhere as closely as possible to standard HTTP and REST conventions in its
+use of HTTP verbs.
+
+|===
+| Verb | Usage
+
+| `GET`
+| Used to retrieve a resource
+
+| `POST`
+| Used to create or update a resource
+
+| `DELETE`
+| Used to delete a resource
+
+|===
+
+Voici la liste des services qui s'executent sur le URL http://ec2-18-224-141-43.us-east-2.compute.amazonaws.com/services/:
+
+
+== SaveSubject
+.request
+include::{snippets}/saveSubject/http-request.adoc[]
+include::{snippets}/saveSubject/request-fields.adoc[]
+
+.response
+include::{snippets}/saveSubject/http-response.adoc[]
+
+== DeleteSubject
+.request
+include::{snippets}/deleteSubject/http-request.adoc[]
+
+.response
+include::{snippets}/deleteSubject/http-response.adoc[]
+
+
+== countSubject
+.request
+include::{snippets}/countSubject/http-request.adoc[]
+
+.response
+include::{snippets}/countSubject/http-response.adoc[]
+
+
+== getAllSubject
+.request
+include::{snippets}/getAllSubject/http-request.adoc[]
+
+.response
+include::{snippets}/getAllSubject/http-response.adoc[]
+
+
+== countSubject
+.request
+include::{snippets}/countSubject/http-request.adoc[]
+
+.response
+include::{snippets}/countSubject/http-response.adoc[]
