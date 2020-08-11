@@ -1,13 +1,8 @@
-package com.ipnetinstitute.csc394.backend.entity; 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+package com.ipnetinstitute.csc394.backend.entity;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity; 
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -21,23 +16,6 @@ public class User extends BaseEntity {
 	String password;
 
 	public User() {
-	}
-
-	public User(String firstName, String lastName, String phone, String email) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.phone = phone;
-		this.email = email;
-	}
-
-	public User(String firstName, String lastName, String userName, String phone, String email, String password, Set<Role> role) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.userName = userName;
-		this.phone = phone;
-		this.email = email;
-		this.password = password;
-		this.role = role;
 	}
 
 //	 @OneToMany(mappedBy = "user", cascade = { CascadeType.ALL }) private
@@ -55,8 +33,13 @@ public class User extends BaseEntity {
 //		this.teacher = teacher;
 //	}
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-	private Set<Role> role = new HashSet<>();
+	@ManyToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+	@JoinTable( name = "user_role", joinColumns = {
+			@JoinColumn( name = "id_user") },
+			inverseJoinColumns = {
+				@JoinColumn( name = "id_role")
+			} )
+	private Set<Role> roles = new HashSet<>();
 
 	public String getFirstName() {
 		return firstName;
@@ -106,15 +89,21 @@ public class User extends BaseEntity {
 		this.password = password;
 	}
 
-	@JsonManagedReference
 	public Set<Role> getRole() {
-		return role;
+		return roles;
 	}
 
 	public void setRole(Set<Role> role) {
-		this.role = role;
+		this.roles = role;
 	}
-	
-	
 
+	public User(String firstName, String lastName, String userName, String phone, String email, String password, Set<Role> role) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.phone = phone;
+		this.email = email;
+		this.password = password;
+		this.roles = role;
+	}
 }

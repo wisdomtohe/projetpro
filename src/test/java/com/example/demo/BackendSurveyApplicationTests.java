@@ -81,7 +81,7 @@ class BackendSurveyApplicationTests extends SpringBootServletInitializer{
 	@Order(1)
 	public void signupTest() throws JsonProcessingException, Exception {
 		System.out.println("SignupTest is called");
-		User user = new User("John", "Doe", "+228 90 12 13 54", "john.doe@gmail.com");
+		User user = new User();
 		user.setModBy(1);
 		user.setUserName("john.doe");
 		user.setPassword("secret@Password");
@@ -145,7 +145,8 @@ class BackendSurveyApplicationTests extends SpringBootServletInitializer{
 		System.out.println("deleteUser is called");
                 List<User> users = userRepo.findAll();
                 User user1 = users.get(users.size()-1);
-                User user = new User(user1.getFirstName(), user1.getLastName(),user1.getPhone() ,user1.getEmail());
+//                User user = new User(user1.getFirstName(), user1.getLastName(),user1.getPhone() ,user1.getEmail());
+                User user = new User();
                 user.setId(user1.getId());
 		System.out.println(user);
 		String userJson = mapper.writeValueAsString(user);
@@ -183,7 +184,8 @@ class BackendSurveyApplicationTests extends SpringBootServletInitializer{
 	@Order(4)
 	public void saveUserTest() throws JsonProcessingException, Exception {
 		System.out.println("SaveUserTest is called");
-		User user = new User("John", "Doe", "+228 90 12 13 14", "john.doe@gmail.com");
+//		User user = new User("John", "Doe", "+228 90 12 13 14", "john.doe@gmail.com");
+		User user = new User();
 		user.setModBy(1);
 		user.setUserName("john.doe");
 		user.setPassword("secret@Password");

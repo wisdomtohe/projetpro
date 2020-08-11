@@ -15,6 +15,9 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.ipnetinstitute.csc394.backend.dao.UserEntityRepository;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
@@ -34,7 +37,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// configure CORS, authorize any post request to a list of endpoints
-		http.cors().and().csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/users/save", "/users/login", "/users/logout").permitAll()
+		http.cors().and().csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/users/save", "/users/login", "/users/logout", "/roles/save").permitAll()
 				// any other request should be authenticated
 				.anyRequest().authenticated().and()
 				// add the filters to be used
@@ -59,5 +62,14 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 		final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
 		return source;
+	}
+	@Bean
+	public WebMvcConfigurer corsConfig() {
+		return new WebMvcConfigurerAdapter() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**");
+			}
+		};
 	}
 }

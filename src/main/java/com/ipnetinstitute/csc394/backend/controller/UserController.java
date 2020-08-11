@@ -1,6 +1,8 @@
 package com.ipnetinstitute.csc394.backend.controller;
 
+import com.ipnetinstitute.csc394.backend.dao.RoleEntitityRepository;
 import com.ipnetinstitute.csc394.backend.dao.UserEntityRepository;
+import com.ipnetinstitute.csc394.backend.entity.Role;
 import com.ipnetinstitute.csc394.backend.entity.User;
 
 import org.springframework.http.HttpStatus;
@@ -8,12 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.util.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/users")
 public class UserController {
     private UserEntityRepository userRepository;
+    private RoleEntitityRepository roleEntitityRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public UserController(UserEntityRepository u,
@@ -43,19 +47,23 @@ public class UserController {
             user.setCreateDateTime(new Date());
             user.setModDateTime(new Date());
         }
-
-
-//		Role role = new Role();
-//		role.setId(1L);
-//		Set<Role> roles = new HashSet<>();
-//		roles.add(role);
+        Set<Role> roles = new HashSet<Role>();
+        for(Role entry :user.getRole()) {
+            System.out.println("///////////////*************////////////////");
+            System.out.println(entry.getName());
+            System.out.println("///////////////*************////////////////");
+            roles.add(roleEntitityRepository.getById(entry.getId()).get());
+            roles.add(roleEntitityRepository.findById(entry.getId()).get());
+        }
+//        roles.add(roleEntitityRepository.findById(user.getRole()[0]))
+        user.setRole( roles );
 
 
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-//		user.setRoles(roles);
 
         user = userRepository.save(user);
 
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 }
+

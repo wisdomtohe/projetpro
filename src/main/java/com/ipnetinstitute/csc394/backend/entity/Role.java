@@ -3,6 +3,7 @@ package com.ipnetinstitute.csc394.backend.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Role  {
@@ -12,10 +13,13 @@ public class Role  {
 	private String name;
 
 	public Role() {
-
 	}
 
 	public Role(String name) {
+		this.name = name;
+	}
+	public Role(Integer id, String name) {
+		this.id = id;
 		this.name = name;
 	}
 
@@ -34,36 +38,16 @@ public class Role  {
 	public void setName(String name) {
 		this.name = name;
 	}
+	@ManyToMany( fetch = FetchType.LAZY, mappedBy = "roles" )
+	private Set<User> users;
 
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_user", nullable = false, referencedColumnName = "id", updatable = false, insertable = false)
-	private User user;
-
-	Integer id_user;
-
-	public Integer getId_user() {
-		return id_user;
+	public Set<User> getUsers() {
+		return users;
 	}
 
-	public void setId_user(Integer id_user) {
-		this.id_user = id_user;
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
-
-	@JsonBackReference
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-
-	// @ManyToOne(fetch = FetchType.LAZY)
-	// @JoinColumn(name = "id_user", nullable = false, unique = true)
-	// private User user;
-
 }
 
 
