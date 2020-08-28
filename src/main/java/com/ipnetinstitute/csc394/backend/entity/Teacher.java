@@ -1,6 +1,10 @@
 package com.ipnetinstitute.csc394.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -23,38 +27,42 @@ public class Teacher extends BaseEntity{
 	public void setMatricule(String matricule) {
 		this.matricule = matricule;
 	}
-	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name="id_user",nullable = false, unique = true)
-//	private User user;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_user",  referencedColumnName = "id", nullable = false, insertable =false ,updatable  = false)
+	@JoinColumn(name="id_user")
 	private User user;
 
-	Integer id_user;
+	@OneToMany(mappedBy = "teacher", cascade = {CascadeType.ALL})
+	@JsonIgnore
+	private List<Course> courses = new ArrayList<Course>();
 
-	public Integer getId_user() {
-		return id_user;
+	public Teacher(String matricule, User user, List<Course> courses, List<Classe> classes) {
+		this.matricule = matricule;
+		this.user = user;
+		this.courses = courses;
+	}
+	public User getUser() {
+		return user;
 	}
 
-	public void setId_user(Integer id_user) {
-		this.id_user = id_user;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	/*
-	 * @OneToMany(mappedBy = "teacher", cascade = {CascadeType.ALL}) private
-	 * List<Course> courses = new ArrayList<Course>();
-	 */
-//	@JsonBackReference
-//	@JsonManagedReference
-//	public User getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
 
- 
-	
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
+	@Override
+	public String toString() {
+		return "Teacher{" +
+				"matricule='" + matricule + '\'' +
+				", user=" + user +
+				", courses=" + courses +
+				'}';
+	}
 }

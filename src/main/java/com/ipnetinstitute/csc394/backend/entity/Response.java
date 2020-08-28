@@ -10,30 +10,36 @@ import javax.persistence.Table;
 @Entity
 @Table(name= "response")
 public class Response extends BaseEntity {
-    
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_survey", referencedColumnName = "id")
-    Survey survey;
+    public Response() {
+    }
 
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_student", referencedColumnName = "id")
-    Student student;
+    public Response(int rating, Survey survey, Question question) {
+        this.rating = rating;
+        this.survey = survey;
+        this.question = question;
+    }
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_qc", referencedColumnName = "id")
-    QOCourse qCourse;
+    int rating;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_qt", referencedColumnName = "id")
-    QOTeacher qTeacher;
+    @OneToOne
+    @JoinColumn(name = "id_survey", referencedColumnName = "id")
+    private Survey survey;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_qi", referencedColumnName = "id")
-    QInfos qInfos;
+    @OneToOne
+    @JoinColumn(name = "id_student", referencedColumnName = "id")
+    private Student student;
 
-    @OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id_qr", referencedColumnName = "id")
-    QRemarks qRemarks;
+    @OneToOne
+    @JoinColumn(name = "id_question", referencedColumnName = "id")
+    private Question question;
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
 
     public Survey getSurvey() {
         return survey;
@@ -43,6 +49,14 @@ public class Response extends BaseEntity {
         this.survey = survey;
     }
 
+    public Question getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
     public Student getStudent() {
         return student;
     }
@@ -50,38 +64,4 @@ public class Response extends BaseEntity {
     public void setStudent(Student student) {
         this.student = student;
     }
-
-    public QOCourse getqCourse() {
-        return qCourse;
-    }
-
-    public void setqCourse(QOCourse qCourse) {
-        this.qCourse = qCourse;
-    }
-
-    public QOTeacher getqTeacher() {
-        return qTeacher;
-    }
-
-    public void setqTeacher(QOTeacher qTeacher) {
-        this.qTeacher = qTeacher;
-    }
-
-    public QInfos getqInfos() {
-        return qInfos;
-    }
-
-    public void setqInfos(QInfos qInfos) {
-        this.qInfos = qInfos;
-    }
-
-    public QRemarks getqRemarks() {
-        return qRemarks;
-    }
-
-    public void setqRemarks(QRemarks qRemarks) {
-        this.qRemarks = qRemarks;
-    }
-
-    
 }

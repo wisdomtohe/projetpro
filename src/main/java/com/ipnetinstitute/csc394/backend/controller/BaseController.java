@@ -35,21 +35,6 @@ public class BaseController implements InitializingBean {
 
 	@Autowired
 	private BaseEntityRepository<Response> responseRepo;
-
-	@Autowired
-	private BaseEntityRepository<QOCourse> qocRepo;
-
-	@Autowired
-	private BaseEntityRepository<QOTeacher> qotRepo;
-
-	@Autowired
-	private BaseEntityRepository<QInfos> qiRepo;
-
-	@Autowired
-	private BaseEntityRepository<QRemarks> qrRepo;
-
-	@Autowired
-	private BaseEntityRepository<StudentCourse> studentCourseRepo;
 	
 	@Autowired
 	private BaseEntityRepository<Question> questionRepo;
@@ -63,12 +48,9 @@ public class BaseController implements InitializingBean {
 
 //	 @Autowired
 //	 private BaseEntityRepository<Role> roleRepo;
-	
-	@Autowired
-	private BaseEntityRepository<Subject> subjectRepo;
 
 	@Autowired
-	private BaseEntityRepository<Term> termRepo;
+	private BaseEntityRepository<Filiere> filiereRepo;
 
 	private static Map<String, BaseEntityRepository> repos;
 
@@ -166,18 +148,12 @@ public class BaseController implements InitializingBean {
 		repos.put("teacher", teacherRepo);
 		repos.put("student", studentRepo);
 		repos.put("question", questionRepo);
-		repos.put("term", termRepo);
+		repos.put("filiere", filiereRepo);
 		repos.put("course", courseRepo);
 		repos.put("classe", classeRepo);
 		repos.put("survey", surveyRepo);
-		repos.put("subject", subjectRepo);
 		repos.put("question", questionRepo);
-		repos.put("student_course", studentCourseRepo);
 		repos.put("response", responseRepo);
-		repos.put("q_teacher", qotRepo);
-		repos.put("q_course", qocRepo);
-		repos.put("q_remarks", qrRepo);
-		repos.put("q_infos", qiRepo);
 
 
 	}

@@ -6,23 +6,17 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
+  "user": {
      "type" : "user",
-     "firstName" : "user",
-     "lastName" : "user",
-     "userName" : "user",
-     "phone" : "99990416",
-     "email" : "user@ipnet.tg",
-     "password" : "user",
-     "roles" : [{"id":1},{"id": "2"}]
-}
-###
+     "firstName" : "Kpaka",
+     "lastName" : "BATAZI",
+     "userName" : "kbatazi",
+     "phone" : "99990420",
+     "email" : "kpaka.batazi@ipnetinstitute.com",
+     "password" : "kbatazi"
 
-POST /roles/save
-Host: localhost:8080
-Content-Type: application/json
-
-{
-  "name" : "user"
+},
+"roles" : [{"id": "2"}]
 }
 
 ###
@@ -32,13 +26,240 @@ Host: localhost:8080
 Content-Type: application/json
 
 {
-  "email" : "user2@ipnet.tg",
-  "password" : "user2",
+  "email" : "etudiant@ipnet.tg",
+  "password" : "etudiant",
   "type" : "user"
 }
+###
+POST /users/save/teacher
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+     "type" : "teacher",
+     "matricule" : "KB001",
+  "user": {
+    "type" : "user",
+    "id" : 16
+  }
+}
+###
+
+POST /roles/save
+Host: localhost:8080
+Content-Type: application/json
+
+{
+  "name" : "ROLE_ROLE"
+}
+###
+
+GET /users/getByEmail/user2@ipnet.tg
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+###
+
+GET /get/user/2
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+###
+GET /roles/all
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
 ###
 
 GET /getAll/user
 Host: localhost:8080
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+###
+
+POST /save/term
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+  "name" : "Semestre 6 Cyber Securite",
+  "code" : "RSS6",
+  "type" : "term"
+}
+
+###
+
+POST /save/teacher
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+     "type" : "teacher",
+     "matricule" : "TT2020",
+  "user": {
+    "type" : "user",
+    "id" : 3
+  }
+}
+###
+
+POST /save/student
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+     "type" : "student",
+     "matricule" : "JA-2020",
+  "user": {
+    "type" : "user",
+    "id" : 8
+  },
+  "classe": {
+    "type" : "classe",
+    "id" : 8
+  }
+}
+###
+
+POST /save/filiere
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+  "type" : "filiere",
+     "code" : "TC",
+     "name" : "Tronc Commun"
+}
+
+###//goooooooooooood
+
+POST /save/classe
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+     "type" : "classe",
+  "code" : "L TC",
+  "name" : "Licence Premiere Annee Tronc Commun",
+  "filiere": {
+    "type" : "filiere",
+    "id" : 4
+  },
+  "courses": [{"type": "course", "id": 1}]
+}
+
+###
+
+POST /save/survey
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+     "type" : "survey",
+  "libelle" : "Evaluation du cours de IGL",
+  "code" : "S-001-HC",
+  "validite" : "2020-08-27",
+  "description" : "Vos impressions sur la transmission du cours de IGL que vous recevez",
+  "course": {
+    "type" : "course",
+    "id" : 8
+  },
+  "questions": [{"type": "question", "id": 1},{"type": "question", "id": 2},{"type": "question", "id": 3},{"type": "question", "id": 4}]
+}
+###
+
+POST /save/response
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+     "type" : "response",
+  "rating" : 3,
+  "survey": {
+    "type" : "survey",
+    "id" : 1
+  },
+  "student": {
+    "type" : "student",
+    "id" : 1
+  },
+  "question": {
+    "type" : "question",
+    "id" : 1
+  }
+}
+###
+
+POST /courses/save/classe
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+"classe":{
+     "type" : "classe",
+  "code" : "L1 TC Test2",
+  "name" : "Licence Premiere Annee Tronc Commun",
+  "filiere": {
+    "type" : "filiere",
+    "id" : 4
+  }},
+  "courses": [{"type": "course", "id": 2}]
+}
+
+###
+POST /courses/save
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+  "course" : {
+  "type" : "course",
+     "code" : "CSC 250",
+     "id" : 8,
+     "name" : "Introduction au Genie Logiciel"
+  },
+  "teacher": {
+    "type" : "teacher",
+    "id" : 5
+  },
+"classes": [{"type" : "classe","id" : 3}]
+}
+###
+POST /save/course
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+  "type" : "course",
+     "code" : "CSC 302",
+     "name" : "Structures de donnees avec Java 2",
+  "teacher": {
+    "type" : "teacher",
+    "id" : 2
+  }
+}
+###
+POST /save/question
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+  "type" : "question",
+     "libelle" : "Prestation vestimentaire",
+     "contenu" : "Le professeur est-il a l'ecoute?"
+}

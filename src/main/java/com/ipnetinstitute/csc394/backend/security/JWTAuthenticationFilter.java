@@ -57,8 +57,8 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 			User user = getMapper().readValue(request.getInputStream(), User.class);
 			Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
-			if (user.getRole() != null) {
-				for (Role role : user.getRole()) {
+			if (user.getRoles() != null) {
+				for (Role role : user.getRoles()) {
 					grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
 				}
 			}
@@ -80,7 +80,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		// find JPA Entity by email
 		User user = userRepository.findByEmail(username);
 		// Initialize the lazy loaded roles
-		Hibernate.initialize(user.getRole());
+		Hibernate.initialize(user.getRoles());
 		// Set the password to null so we don't send it on the JWT payload
 		user.setPassword(null);
 		// get the json string of the user with Jackson

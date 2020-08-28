@@ -1,6 +1,7 @@
 package com.ipnetinstitute.csc394.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -38,7 +39,9 @@ public class Role  {
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	@ManyToMany( fetch = FetchType.LAZY, mappedBy = "roles" )
+	@JsonIgnore
 	private Set<User> users;
 
 	public Set<User> getUsers() {

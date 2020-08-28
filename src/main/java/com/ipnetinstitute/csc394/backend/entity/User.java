@@ -1,5 +1,10 @@
 package com.ipnetinstitute.csc394.backend.entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -18,20 +23,18 @@ public class User extends BaseEntity {
 	public User() {
 	}
 
-//	 @OneToMany(mappedBy = "user", cascade = { CascadeType.ALL }) private
-//	 List<Student> student = new ArrayList<Student>();
-	 
+	@OneToMany(mappedBy = "user")
+	@JsonIgnore
+	private List<Teacher> teacher;
 
-//	@OneToMany(mappedBy = "user", cascade =  CascadeType.ALL)
-//	private Set<Teacher> teacher = new HashSet<>();
-////	@JsonManagedReference
-//	public Set<Teacher> getTeacher() {
-//		return teacher;
-//	}
-//
-//	public void setTeacher(Set<Teacher> teacher) {
-//		this.teacher = teacher;
-//	}
+
+	@OneToMany(targetEntity = Student.class, mappedBy = "user")
+	@JsonIgnore
+	private List<Student> students;
+
+	public List<Student> getStudent() {
+		return students;
+	}
 
 	@ManyToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL )
 	@JoinTable( name = "user_role", joinColumns = {
@@ -55,6 +58,10 @@ public class User extends BaseEntity {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	private List<Teacher> getTeacher() {
+		return teacher;
 	}
 
 	public String getUserName() {
@@ -89,12 +96,20 @@ public class User extends BaseEntity {
 		this.password = password;
 	}
 
-	public Set<Role> getRole() {
+	public void setTeacher(List<Teacher> teacher) {
+		this.teacher = teacher;
+	}
+
+	public void setStudent(List<Student> students) {
+		this.students = students;
+	}
+
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRole(Set<Role> role) {
-		this.roles = role;
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 
 	public User(String firstName, String lastName, String userName, String phone, String email, String password, Set<Role> role) {
@@ -105,5 +120,17 @@ public class User extends BaseEntity {
 		this.email = email;
 		this.password = password;
 		this.roles = role;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", userName='" + userName + '\'' +
+				", phone='" + phone + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				'}';
 	}
 }

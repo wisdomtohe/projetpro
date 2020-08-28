@@ -5,6 +5,6 @@ import javax.transaction.Transactional;
 import com.ipnetinstitute.csc394.backend.entity.Classe;
 
 @Transactional
-public interface ClassEntityRepository  extends BaseEntityRepository<Classe>{
+public interface ClasseEntityRepository extends BaseEntityRepository<Classe>{
 
 }

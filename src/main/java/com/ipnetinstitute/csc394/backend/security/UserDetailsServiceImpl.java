@@ -32,9 +32,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		try {
 			// roles are lazy fetched
-			Hibernate.initialize(user.getRole());
-			if (user.getRole() != null) {
-				for (Role role : user.getRole()) {
+			Hibernate.initialize(user.getRoles());
+			if (user.getRoles() != null) {
+				for (Role role : user.getRoles()) {
 					grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
 				}
 			}
@@ -53,7 +53,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		User user = userRepository.findByEmail(email);
 		
 		if(user != null) {
-			Set<Role> roles = user.getRole();
+			Set<Role> roles = user.getRoles();
 			UserLogin userLogin = new UserLogin();
 			
 			userLogin.setUsername(user.getEmail());

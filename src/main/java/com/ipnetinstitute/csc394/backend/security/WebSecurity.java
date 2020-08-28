@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -37,7 +38,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		// configure CORS, authorize any post request to a list of endpoints
-		http.cors().and().csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/users/save", "/users/login", "/users/logout", "/roles/save").permitAll()
+		http.cors().and().csrf().disable().authorizeRequests().antMatchers(HttpMethod.POST, "/users/save", "/users/login", "/users/logout", "/users/getByEmail/{mail}", "/roles/save", "/roles/all").permitAll()
 				// any other request should be authenticated
 				.anyRequest().authenticated().and()
 				// add the filters to be used
@@ -46,8 +47,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 				// we don't want sessions for our application
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		// Add a filter to validate the tokens with every request
-				// httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-		// http .csrf().disable() .authorizeRequests() .anyRequest().permitAll();
+//				 httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+//		 http .csrf().disable() .authorizeRequests() .anyRequest().permitAll();
 				
 	}
 

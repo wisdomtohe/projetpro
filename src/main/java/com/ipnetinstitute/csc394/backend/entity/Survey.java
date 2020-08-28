@@ -1,35 +1,59 @@
 package com.ipnetinstitute.csc394.backend.entity;
 
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Survey extends BaseEntity {
-
-	String title, description, beginMessage, endMessage;
-
-	Date beginDate, endDate;
-
-	Integer status;
-	
-	
-	/*
-	 * @OneToMany(mappedBy = "survey", cascade = { CascadeType.ALL }) private
-	 * List<StudentSurvey> student_surveys = new ArrayList<StudentSurvey>();
-	 */
-
-	public String getTitle() {
-		return title;
+	public Survey() {
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public Survey(String libelle, String code, String description, Date validite, Course course, List<Question> questions, Response response) {
+		this.libelle = libelle;
+		this.code = code;
+		this.description = description;
+		this.validite = validite;
+		this.course = course;
+		this.questions = questions;
+		this.response = response;
+	}
+
+	String libelle, code, description;
+
+	Date validite;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_course")
+	private Course course;
+
+	@ManyToMany(targetEntity = Question.class)
+	@JoinTable(
+	  name = "survey_has_question",
+	  joinColumns = @JoinColumn(name = "id_survey"),
+	  inverseJoinColumns = @JoinColumn(name = "id_question"))
+	private List<Question> questions;
+
+	@OneToOne(mappedBy = "survey")
+    private Response response;
+
+	public String getLibelle() {
+		return libelle;
+	}
+
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getDescription() {
@@ -40,87 +64,35 @@ public class Survey extends BaseEntity {
 		this.description = description;
 	}
 
-	public String getBeginMessage() {
-		return beginMessage;
+	public Date getValidite() {
+		return validite;
 	}
 
-	public void setBeginMessage(String beginMessage) {
-		this.beginMessage = beginMessage;
+	public void setValidite(Date validite) {
+		this.validite = validite;
 	}
 
-	public String getEndMessage() {
-		return endMessage;
-	}
-
-	public void setEndMessage(String endMessage) {
-		this.endMessage = endMessage;
-	}
-
-	public Date getBeginDate() {
-		return beginDate;
-	}
-
-	public void setBeginDate(Date beginDate) {
-		this.beginDate = beginDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_cat_survey", nullable = false, referencedColumnName = "id", updatable = false, insertable = false)
-	private CatSurvey catSurvey;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_course", nullable = false, referencedColumnName = "id", updatable = false, insertable = false)
-	private Course course;
-
-	Integer id_cat_survey, id_course;
-
-	public Integer getId_cat_survey() {
-		return id_cat_survey;
-	}
-
-	public void setId_cat_survey(Integer id_cat_survey) {
-		this.id_cat_survey = id_cat_survey;
-	}
-
-	public Integer getId_course() {
-		return id_course;
-	}
-
-	public void setId_course(Integer id_course) {
-		this.id_course = id_course;
-	}
-
-	@JsonBackReference(value = "catsurvey")
-       public CatSurvey getCatSurvey() {
-		return catSurvey;
-	}
-
-	public void setCatSurvey(CatSurvey catSurvey) {
-		this.catSurvey = catSurvey;
-	}
-
-	@JsonBackReference(value = "coursesurvey")
 	public Course getCourse() {
 		return course;
 	}
 
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+
+	public List<Question> getQuestions() {
+		return questions;
+	}
+
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
+
+	public Response getResponse() {
+		return response;
+	}
+
+	public void setResponse(Response response) {
+		this.response = response;
 	}
 }

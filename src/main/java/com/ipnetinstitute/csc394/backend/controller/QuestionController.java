@@ -3,9 +3,7 @@ package com.ipnetinstitute.csc394.backend.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.ipnetinstitute.csc394.backend.dao.CategorySurveyEntityRepository;
 import com.ipnetinstitute.csc394.backend.dao.QuestionEntityRepository;
-import com.ipnetinstitute.csc394.backend.entity.Question;
 
 
 import org.springframework.beans.factory.annotation.Autowired;

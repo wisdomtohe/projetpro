@@ -69,7 +69,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 					request.setAttribute("user", user);
 					Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 					
-			        for (Role role : user.getRole()){
+			        for (Role role : user.getRoles()){
 			            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
 			        }
 					return new UsernamePasswordAuthenticationToken(user.getEmail(), null, grantedAuthorities);

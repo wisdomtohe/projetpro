@@ -14,13 +14,13 @@ import com.ipnetinstitute.csc394.backend.entity.Survey;
 @Transactional
 public interface SurveyEntityRepository extends BaseEntityRepository<Survey>  {
     
-    @Query(value = "select sv.* from survey sv inner join student_survey " +
-     "studs on sv.id = studs.id_survey  inner join student s " +
-      "on studs.id_student = s.id   where s.id = :userId  ", nativeQuery = true)
+    @Query(value = "select sv.* from survey sv inner join response " +
+     "r on sv.id = r.id_survey  inner join student s " +
+      "on r.id_student = s.id   where s.id = :userId  ", nativeQuery = true)
     List<Survey> findAllSurveyRespondbyUser(@Param("userId") Integer userId);
 
 
-    @Query(value = "SELECT * FROM survey s2 WHERE s2.end_date >= now()", nativeQuery = true)
+    @Query(value = "SELECT * FROM survey s WHERE s.end_date >= now()", nativeQuery = true)
     List<Survey> findAllSurveyStillValid();
 
 
@@ -31,10 +31,14 @@ public interface SurveyEntityRepository extends BaseEntityRepository<Survey>  {
     List<Survey> findbyCategoryAndCourse(@Param("categoryId") Integer catSurveyId , @Param("courseId") Integer idCourse);
 
     
-    @Query(value= "SELECT DISTINCT S.* FROM survey S INNER JOIN cat_survey CS ON (S.id_cat_survey = CS.id)" + 
-            " INNER JOIN cat_survey_question CSQ ON (CSQ.id_cat_survey= CS.id) " +
-            "WHERE CSQ.id_question NOT IN (SELECT SS.id_question " +
-             "FROM student_survey SS, student ST WHERE ST.id = SS.id_student AND  ST.id_user = :UserID);", nativeQuery = true)
+//    @Query(value= "SELECT DISTINCT S.* FROM survey S INNER JOIN cat_survey CS ON (S.id_cat_survey = CS.id)" +
+//            " INNER JOIN cat_survey_question CSQ ON (CSQ.id_cat_survey= CS.id) " +
+//            "WHERE CSQ.id_question NOT IN (SELECT SS.id_question " +
+//             "FROM student_survey SS, student ST WHERE ST.id = SS.id_student AND  ST.id_user = :UserID);", nativeQuery = true)
+//
+    @Query(value= "SELECT DISTINCT S.* FROM survey S inner join response r on r.id_survey = s.id left join " +
+            "FROM student_survey SS, student ST WHERE ST.id = SS.id_student AND  ST.id_user = :UserID);", nativeQuery = true)
+
     List<Survey> pendingSurvey(@Param("UserID") Integer userId);
 
     

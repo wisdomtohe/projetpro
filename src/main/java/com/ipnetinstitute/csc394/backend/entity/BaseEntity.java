@@ -19,22 +19,13 @@ include = com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY, property = 
 @JsonSubTypes({
     @JsonSubTypes.Type(value = Teacher.class, name = "teacher"),     
     @JsonSubTypes.Type(value = Student.class, name = "student"),
-    @JsonSubTypes.Type(value = CatSurvey.class, name = "cat_survey"),
     @JsonSubTypes.Type(value = Classe.class, name = "classe"),
     @JsonSubTypes.Type(value = Course.class, name = "course"),
 	@JsonSubTypes.Type(value = Question.class, name = "question"),
-	@JsonSubTypes.Type(value = Role.class, name = "role"),
-
-    @JsonSubTypes.Type(value = StudentCourse.class, name = "student_course"),
-    @JsonSubTypes.Type(value = Subject.class, name = "subject"),
     @JsonSubTypes.Type(value = Survey.class, name = "survey"),
-	@JsonSubTypes.Type(value = Term.class, name = "term"),
+	@JsonSubTypes.Type(value = Filiere.class, name = "filiere"),
     @JsonSubTypes.Type(value = User.class, name = "user"),
-    @JsonSubTypes.Type(value = Response.class, name = "response"),
-    @JsonSubTypes.Type(value = QOCourse.class, name = "q_course"),
-    @JsonSubTypes.Type(value = QOTeacher.class, name = "q_teacher"),
-    @JsonSubTypes.Type(value = QRemarks.class, name = "q_remarks"),
-    @JsonSubTypes.Type(value = QInfos.class, name = "q_infos")
+    @JsonSubTypes.Type(value = Response.class, name = "response")
     
 }) 
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -42,14 +33,14 @@ include = com.fasterxml.jackson.annotation.JsonTypeInfo.As.PROPERTY, property = 
 public abstract  class BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	Integer id;
+	Long id;
 
 	@Column(nullable = true)
-	Date createDateTime;
+	Date createdAt;
 	@Column(nullable = true)
-	Date modDateTime;
+	Date updatedAt;
 	@Column(nullable = true)
-	Integer modBy;
+	Long modBy;
 	
 	@Transient
 	String error;
@@ -60,28 +51,28 @@ public abstract  class BaseEntity {
 	public void setError(String error) {
 		this.error = error;
 	}
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Date getCreateDateTime() {
-		return createDateTime;
+		return createdAt;
 	}
-	public void setCreateDateTime(Date createDateTime) {
-		this.createDateTime = createDateTime;
+	public void setCreateDateTime(Date createdAt) {
+		this.createdAt = createdAt;
 	}
 	public Date getModDateTime() {
-		return modDateTime;
+		return updatedAt;
 	}
-	public void setModDateTime(Date modDateTime) {
-		this.modDateTime = modDateTime;
+	public void setModDateTime(Date updatedAt) {
+		this.updatedAt = updatedAt;
 	}
-	public Integer getModBy() {
+	public Long getModBy() {
 		return modBy;
 	}
-	public void setModBy(Integer modBy) {
+	public void setModBy(Long modBy) {
 		this.modBy = modBy;
 	}
 	

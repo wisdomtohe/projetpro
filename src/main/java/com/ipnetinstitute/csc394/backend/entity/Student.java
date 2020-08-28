@@ -22,21 +22,14 @@ public class Student extends BaseEntity{
 	
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_user", nullable = false, referencedColumnName = "id", updatable = false, insertable = false)
+	@JoinColumn(name="id_user")
 	private User user;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="id_classe", referencedColumnName = "id")
+	private Classe classe;
 
 	@OneToOne(mappedBy = "student")
     private Response response;
-
-	Integer id_user;
-
-	public Integer getId_user() {
-		return id_user;
-	}
-
-	public void setId_user(Integer id_user) {
-		this.id_user = id_user;
-	}
 
 	public User getUser() {
 		return user;
@@ -54,5 +47,11 @@ public class Student extends BaseEntity{
 		this.response = response;
 	}
 
+	public Classe getClasse() {
+		return classe;
+	}
 
+	public void setClasse(Classe classe) {
+		this.classe = classe;
+	}
 }
