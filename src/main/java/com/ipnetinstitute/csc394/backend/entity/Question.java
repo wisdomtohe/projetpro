@@ -1,5 +1,8 @@
 package com.ipnetinstitute.csc394.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
@@ -10,10 +13,20 @@ public class Question  extends BaseEntity{
 	private String libelle;
 	private String contenu;
 
-	@ManyToMany(mappedBy = "questions", targetEntity = Survey.class)
+	public Question() {
+	}
+
+	public Question(String libelle, String contenu) {
+		this.libelle = libelle;
+		this.contenu = contenu;
+	}
+
+	@ManyToMany(mappedBy = "questions")
+	@JsonIgnore
 	private List<Survey> surveys;
 
-	@OneToOne(mappedBy = "question")
+	@OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private Response response;
 
 	public String getLibelle() {
@@ -47,4 +60,6 @@ public class Question  extends BaseEntity{
 	public void setResponse(Response response) {
 		this.response = response;
 	}
+
+
 }

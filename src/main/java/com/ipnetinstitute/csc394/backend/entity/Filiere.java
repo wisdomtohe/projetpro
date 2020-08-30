@@ -1,5 +1,6 @@
 package com.ipnetinstitute.csc394.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -14,8 +15,8 @@ public class Filiere extends BaseEntity {
 	String code;
 	String name;
 	@OneToMany(mappedBy = "filiere")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-	private List<Classe> classes = new ArrayList<Classe>();
+	@JsonIgnore
+	private List<Classe> classes;
 
 	public String getCode() {
 		return code;
@@ -37,4 +38,5 @@ public class Filiere extends BaseEntity {
 	public void setClasses(List<Classe> classes) {
 		this.classes = classes;
 	}
+
 }

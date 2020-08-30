@@ -7,7 +7,6 @@ public class ClasseCourseWP {
     Course course;
     List<Course> courses;
     Classe classe;
-    Teacher teacher;
 
     public ClasseCourseWP() {
     }
@@ -26,14 +25,6 @@ public class ClasseCourseWP {
 
     public void setClasses(List<Classe> classes) {
         this.classes = classes;
-    }
-
-    public Teacher getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
     }
 
     public List<Course> getCourses() {

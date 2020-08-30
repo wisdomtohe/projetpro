@@ -1,13 +1,11 @@
 package com.ipnetinstitute.csc394.backend.controller;
 
+import com.ipnetinstitute.csc394.backend.dao.CourseEntityRepository;
 import com.ipnetinstitute.csc394.backend.dao.RoleEntitityRepository;
 import com.ipnetinstitute.csc394.backend.dao.TeacherEntityRepository;
 import com.ipnetinstitute.csc394.backend.dao.UserEntityRepository;
-import com.ipnetinstitute.csc394.backend.entity.Role;
-import com.ipnetinstitute.csc394.backend.entity.Teacher;
-import com.ipnetinstitute.csc394.backend.entity.User;
+import com.ipnetinstitute.csc394.backend.entity.*;
 
-import com.ipnetinstitute.csc394.backend.entity.UserRoleWP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +22,8 @@ public class UserController {
     private UserEntityRepository userRepository;
     @Autowired
     private TeacherEntityRepository teacherRepository;
+    @Autowired
+    private CourseEntityRepository courseEntityRepository;
     @Autowired
     private RoleEntitityRepository roleEntitityRepository;
     @Autowired
@@ -83,7 +83,11 @@ public class UserController {
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
     @RequestMapping(value = "/save/teacher", method = RequestMethod.POST)
-    public ResponseEntity<Teacher> registerTeacher(@RequestBody Teacher teacher) {
+    public ResponseEntity<Teacher> registerTeacher(@RequestBody TeacherCourseWP teacherCourseWP) {
+        Teacher teacher = teacherCourseWP.getTeacher();
+        List<Course> courses = teacherCourseWP.getCourses();
+        List<Course> tcourses = new ArrayList<Course>();
+
         if (teacher == null) {
             return new ResponseEntity<Teacher>(HttpStatus.BAD_REQUEST);
         }
@@ -98,7 +102,14 @@ public class UserController {
         User user = userRepository.findById(teacher.getUser().getId()).get();
         teacher.setUser(user);
 
-        System.out.println(teacher);
+        for(Course entry :courses) {
+            System.out.println("///////////////*************////////////////");
+            System.out.println(entry.getName());
+            System.out.println("///////////////******* le cours ******////////////////");
+            System.out.println(courseEntityRepository.findById(entry.getId()).get().getCode());
+            tcourses.add(courseEntityRepository.findById(entry.getId()).get());
+        }
+        teacher.setCourses(tcourses);
 
         teacher = teacherRepository.save(teacher);
 

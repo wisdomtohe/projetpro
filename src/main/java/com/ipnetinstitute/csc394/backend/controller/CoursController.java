@@ -44,10 +44,6 @@ public class CoursController  {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ResponseEntity<Course> saveCourse(@RequestBody ClasseCourseWP classeCourseWP) {
         Course course = classeCourseWP.getCourse();
-        Teacher teacher = classeCourseWP.getTeacher();
-        Teacher teacherToPersist = teacherEntityRepository.findById(teacher.getId()).get();
-        System.out.println("**********************Teacher**********************");
-        System.out.println(course.getTeacher());
 
         List<Classe> classes = classeCourseWP.getClasses();
         List<Classe> courseClasses = new ArrayList<Classe>();
@@ -68,9 +64,7 @@ public class CoursController  {
             System.out.println("///////////////*************////////////////");
             courseClasses.add(classeEntityRepository.findById(entry.getId()).get());
         }
-//        roles.add(roleEntitityRepository.findById(course.getRole()[0]))
         course.setClasses(courseClasses);
-        course.setTeacher(teacherToPersist);
 
         course = courseRepo.save(course);
 

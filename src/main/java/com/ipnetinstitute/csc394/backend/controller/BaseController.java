@@ -57,7 +57,7 @@ public class BaseController implements InitializingBean {
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/get/{entity}/{id}", method = RequestMethod.GET)
 	public <T extends BaseEntity> Optional<T> getById(@PathVariable("entity") final String entity,
-			@PathVariable("id") final Integer id) throws ClassNotFoundException {
+			@PathVariable("id") final Long id) throws ClassNotFoundException {
 		Optional<T> result = null;
 		try {
 			result = (Optional<T>) repos.get(entity).findById(id);
@@ -129,7 +129,7 @@ public class BaseController implements InitializingBean {
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "delete/{entity}/{id}", method = RequestMethod.GET)
-	public String deleteById(@PathVariable("entity") final String entity, @PathVariable("id") final Integer id)
+	public String deleteById(@PathVariable("entity") final String entity, @PathVariable("id") final Long id)
 			throws ClassNotFoundException {
 		try {
 			repos.get(entity).deleteById(id);

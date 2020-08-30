@@ -1,16 +1,29 @@
 package com.ipnetinstitute.csc394.backend.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="student")
 public class Student extends BaseEntity{
 	String matricule;
+
+	@OneToOne(fetch = FetchType.EAGER)
+	    @JoinTable(name = "user_is_student",
+	      joinColumns =
+	        { @JoinColumn(name = "id_student") },
+	      inverseJoinColumns =
+	        { @JoinColumn(name = "id_user") })
+	private User user;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="id_classe")
+	private Classe classe;
+
+	@OneToOne(mappedBy = "student")
+	@JsonIgnore
+    private Response response;
 
 	public String getMatricule() {
 		return matricule;
@@ -19,17 +32,6 @@ public class Student extends BaseEntity{
 	public void setMatricule(String matricule) {
 		this.matricule = matricule;
 	}
-	
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_user")
-	private User user;
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_classe", referencedColumnName = "id")
-	private Classe classe;
-
-	@OneToOne(mappedBy = "student")
-    private Response response;
 
 	public User getUser() {
 		return user;
@@ -39,19 +41,19 @@ public class Student extends BaseEntity{
 		this.user = user;
 	}
 
-	public Response getResponse() {
-		return response;
-	}
-
-	public void setResponse(Response response) {
-		this.response = response;
-	}
-
 	public Classe getClasse() {
 		return classe;
 	}
 
 	public void setClasse(Classe classe) {
 		this.classe = classe;
+	}
+
+	public Response getResponse() {
+		return response;
+	}
+
+	public void setResponse(Response response) {
+		this.response = response;
 	}
 }

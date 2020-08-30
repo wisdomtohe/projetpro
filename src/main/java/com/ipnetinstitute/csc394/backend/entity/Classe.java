@@ -1,6 +1,7 @@
 package com.ipnetinstitute.csc394.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,20 +12,17 @@ public class Classe extends BaseEntity{
 	String code;
 	String name;
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="id_filiere")
 	private Filiere filiere;
 
-	@ManyToMany
-	@JoinTable(
-	  name = "class_has_course",
-	  joinColumns = @JoinColumn(name = "id_classe"),
-	  inverseJoinColumns = @JoinColumn(name = "id_course"))
-	private List<Course> courses = new ArrayList<Course>() ;
+	@ManyToMany(mappedBy = "classes", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<Course> courses;
 
 	@OneToMany(mappedBy = "classe")
 	@JsonIgnore
-	private List<Student> students = new ArrayList<>() ;
+	private List<Student> students;
 
 	public String getName() {
 		return name;
@@ -65,4 +63,5 @@ public class Classe extends BaseEntity{
 	public void setCode(String code) {
 		this.code = code;
 	}
+
 }

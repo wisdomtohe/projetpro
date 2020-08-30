@@ -1061,3 +1061,39 @@ inner join student st on (st.id_classe = c.id)
 inner join survey_has_question shq on (shq.id_survey = s.id)
 WHERE shq.id_question NOT IN (SELECT r.id_question FROM response r,
 student ST WHERE ST.id = r.id_student AND ST.id_user = 3)
+
+userForm: {
+                    firstName: "",
+                    lastName:'',
+                    userName: "",
+                    password: "",
+                    phone: "98133319",
+                    email: "kokouvi.tohe@ipnetinstitute.com",
+                    roles:[]
+                },
+                my_roles:[],
+                my_role:{
+                    id
+                },
+
+let rr = this.my_role
+                for (const key in this.userForm.roles) {
+                    rr.id=key
+                    this.my_roles.push(this.my_role)
+                }
+
+roleEntities: function (){
+                let rr = this.userForm.my_role
+                if (this.userForm.roles[0]) {
+                    rr.id=this.userForm.roles[0]
+                    this.userForm.my_roles.push(rr)
+                }
+                if (this.userForm.roles[1]) {
+                    rr.id=this.userForm.roles[1]
+                    this.userForm.my_roles.push(rr)
+                }
+                if (this.userForm.roles[2]) {
+                    rr.id=this.userForm.roles[2]
+                    this.userForm.my_roles.push(rr)
+                }
+            },

@@ -1,7 +1,6 @@
 package com.ipnetinstitute.csc394.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,15 +10,19 @@ public class Course extends BaseEntity {
 	private String name;
 	private String code;
 	
-	@ManyToMany(mappedBy = "courses")
-	@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+	@ManyToMany( fetch = FetchType.LAZY)
+	@JoinTable( name = "classe_has_course", joinColumns = {
+			@JoinColumn( name = "id_course") },
+			inverseJoinColumns = {
+				@JoinColumn( name = "id_classe")
+			} )
 	private List<Classe> classes;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name ="id_teacher")
-	private Teacher teacher;
+	@ManyToMany( fetch = FetchType.LAZY, mappedBy = "courses" )
+	@JsonIgnore
+	private List<Teacher> teachers;
 
-	@OneToMany(mappedBy = "course")
+	@ManyToMany(mappedBy = "courses")
 	@JsonIgnore
 	private List<Survey> surveys;
 
@@ -47,14 +50,6 @@ public class Course extends BaseEntity {
 		this.classes = classes;
 	}
 
-	public Teacher getTeacher() {
-		return teacher;
-	}
-
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
-	}
-
 	public List<Survey> getSurveys() {
 		return surveys;
 	}
@@ -63,5 +58,11 @@ public class Course extends BaseEntity {
 		this.surveys = surveys;
 	}
 
+	public List<Teacher> getTeachers() {
+		return teachers;
+	}
 
+	public void setTeachers(List<Teacher> teachers) {
+		this.teachers = teachers;
+	}
 }

@@ -22,15 +22,15 @@ public class Response extends BaseEntity {
     int rating;
 
     @OneToOne
-    @JoinColumn(name = "id_survey", referencedColumnName = "id")
+    @JoinColumn(name = "id_survey")
     private Survey survey;
 
     @OneToOne
-    @JoinColumn(name = "id_student", referencedColumnName = "id")
+    @JoinColumn(name = "id_student")
     private Student student;
 
     @OneToOne
-    @JoinColumn(name = "id_question", referencedColumnName = "id")
+    @JoinColumn(name = "id_question")
     private Question question;
 
     public int getRating() {

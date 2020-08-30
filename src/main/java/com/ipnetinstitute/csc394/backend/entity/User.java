@@ -23,18 +23,14 @@ public class User extends BaseEntity {
 	public User() {
 	}
 
-	@OneToMany(mappedBy = "user")
+
+	@OneToOne(mappedBy = "user")
 	@JsonIgnore
-	private List<Teacher> teacher;
+	private Teacher teacher;
 
-
-	@OneToMany(targetEntity = Student.class, mappedBy = "user")
+	@OneToOne(mappedBy = "user")
 	@JsonIgnore
-	private List<Student> students;
-
-	public List<Student> getStudent() {
-		return students;
-	}
+	private Student student;
 
 	@ManyToMany( fetch = FetchType.LAZY, cascade = CascadeType.ALL )
 	@JoinTable( name = "user_role", joinColumns = {
@@ -43,6 +39,16 @@ public class User extends BaseEntity {
 				@JoinColumn( name = "id_role")
 			} )
 	private Set<Role> roles = new HashSet<>();
+
+	public User(String firstName, String lastName, String userName, String phone, String email, String password, Set<Role> role) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.userName = userName;
+		this.phone = phone;
+		this.email = email;
+		this.password = password;
+		this.roles = role;
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -58,10 +64,6 @@ public class User extends BaseEntity {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	private List<Teacher> getTeacher() {
-		return teacher;
 	}
 
 	public String getUserName() {
@@ -96,12 +98,20 @@ public class User extends BaseEntity {
 		this.password = password;
 	}
 
-	public void setTeacher(List<Teacher> teacher) {
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
 
-	public void setStudent(List<Student> students) {
-		this.students = students;
+	public Student getStudent() {
+		return student;
+	}
+
+	public void setStudent(Student student) {
+		this.student = student;
 	}
 
 	public Set<Role> getRoles() {
@@ -110,27 +120,5 @@ public class User extends BaseEntity {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
-	}
-
-	public User(String firstName, String lastName, String userName, String phone, String email, String password, Set<Role> role) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.userName = userName;
-		this.phone = phone;
-		this.email = email;
-		this.password = password;
-		this.roles = role;
-	}
-
-	@Override
-	public String toString() {
-		return "User{" +
-				"firstName='" + firstName + '\'' +
-				", lastName='" + lastName + '\'' +
-				", userName='" + userName + '\'' +
-				", phone='" + phone + '\'' +
-				", email='" + email + '\'' +
-				", password='" + password + '\'' +
-				'}';
 	}
 }
