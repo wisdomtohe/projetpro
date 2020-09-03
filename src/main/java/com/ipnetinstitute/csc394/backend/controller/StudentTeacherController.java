@@ -2,11 +2,9 @@ package com.ipnetinstitute.csc394.backend.controller;
 
 import com.ipnetinstitute.csc394.backend.dao.StudentEntityRepository;
 import com.ipnetinstitute.csc394.backend.dao.TeacherEntityRepository;
+import com.ipnetinstitute.csc394.backend.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,5 +41,19 @@ public class StudentTeacherController {
         } finally {
             return result;
         }
+    }
+
+//    @RequestMapping(value = "/get/user/student/{id}", method = RequestMethod.GET)
+//    public Student getStudentByHisUid(@PathVariable("id") Long id){
+//        return studentRepo.findStudentByUserId(id);
+//    }
+
+    @RequestMapping(value = "/get/user/student/{id}", method = RequestMethod.GET)
+    Long studentLoggedIn(@PathVariable("id") Long id){
+        return studentRepo.studentLoggedIn(id);
+    }
+    @RequestMapping(value = "/get/user/teacher/{id}", method = RequestMethod.GET)
+    Long teacherLoggedIn(@PathVariable("id") Long id){
+        return studentRepo.teacherLoggedIn(id);
     }
 }

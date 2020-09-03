@@ -6,19 +6,21 @@ import java.util.List;
 import com.ipnetinstitute.csc394.backend.dao.QuestionEntityRepository;
 
 
+import com.ipnetinstitute.csc394.backend.dao.SurveyEntityRepository;
+import com.ipnetinstitute.csc394.backend.entity.Survey;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-// @RequestMapping(value="/question")
+ @RequestMapping(value="/questions")
 public class QuestionController  {
 	
     @Autowired
     private QuestionEntityRepository questionRepo;
+
+    @Autowired
+    private SurveyEntityRepository surveyEntityRepository;
 
     // @Autowired
     // private CategorieSurveyQuestionEntityRepository cat_survey_questionRepo;
@@ -62,6 +64,16 @@ public class QuestionController  {
         } finally {
             return result;
         }
+    }
+
+    @RequestMapping(value = "/pending/{surveyId}", method = RequestMethod.GET)
+    public List getPendingQuestionBySurvey(@PathVariable("surveyId") Long sid){
+        List result = new ArrayList();
+        Survey s = surveyEntityRepository.findById(sid).get();
+
+        result= s.getQuestions();
+
+        return result;
     }
 	
 
