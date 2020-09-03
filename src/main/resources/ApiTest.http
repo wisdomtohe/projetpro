@@ -128,6 +128,49 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpc
 
 ###
 
+POST /surveys/save
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+"survey":{
+     "type" : "survey",
+  "libelle" : "Semestre 2 etat de cours",
+  "code" : "S-0002-HC",
+  "beginDate" : "2020-08-27",
+  "endDate" : "2020-08-30",
+  "description" : "Vos impressions sur la transmission des cours de s2"
+},
+  "courses": [{"type": "course", "id": 1},{"type": "course", "id": 2}],
+  "questions": [{"type": "question", "id": 1},{"type": "question", "id": 2},{"type": "question", "id": 3},{"type": "question", "id": 4}]
+}
+
+###
+
+POST /save/response
+Host: localhost:8080
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
+{
+     "type" : "response",
+  "rating" : 3,
+  "survey": {
+    "type" : "survey",
+    "id" : 1
+  },
+  "student": {
+    "type" : "student",
+    "id" : 1
+  },
+  "question": {
+    "type" : "question",
+    "id" : 1
+  }
+}
+###
+
 POST /users/login
 Host: localhost:8080
 Content-Type: application/json
@@ -166,55 +209,20 @@ Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
 ###
 
-GET /get/question/3
+GET /questions/pending/1
 Host: localhost:8080
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
 ###
 
-GET /delete/question/3
+GET /surveys/passed/2
 Host: localhost:8080
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
+
 ###
 
-POST /save/survey
+GET /get/teacher/1
 Host: localhost:8080
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
-
-{
-     "type" : "survey",
-  "libelle" : "Evaluation du cours de IGL",
-  "code" : "S-001-HC",
-  "validite" : "2020-08-27",
-  "description" : "Vos impressions sur la transmission du cours de IGL que vous recevez",
-  "course": {
-    "type" : "course",
-    "id" : 8
-  },
-  "questions": [{"type": "question", "id": 1},{"type": "question", "id": 2},{"type": "question", "id": 3},{"type": "question", "id": 4}]
-}
-###
-
-POST /save/response
-Host: localhost:8080
-Content-Type: application/json
-Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMkBpcG5ldC50ZyIsInVzZXIiOiJ7XCJ0eXBlXCI6XCJ1c2VyXCIsXCJpZFwiOjEsXCJjcmVhdGVEYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2REYXRlVGltZVwiOjE1OTY1NzM0MzgwMDAsXCJtb2RCeVwiOm51bGwsXCJlcnJvclwiOm51bGwsXCJmaXJzdE5hbWVcIjpcInVzZXIyXCIsXCJsYXN0TmFtZVwiOlwidXNlcjJcIixcInVzZXJOYW1lXCI6XCJ1c2VyMlwiLFwicGhvbmVcIjpcIjk5OTkwNDE2XCIsXCJlbWFpbFwiOlwidXNlcjJAaXBuZXQudGdcIixcInBhc3N3b3JkXCI6bnVsbCxcInJvbGVcIjpbXX0ifQ.ROfbuuJ1MqO6TI1yM4pgL3vnrOnYoHKPwKyDeo4IGVDg6mC_jxII45GMBd2f_rBT7AdmdozNbDKKppcAKwDfYg
-
-{
-     "type" : "response",
-  "rating" : 3,
-  "survey": {
-    "type" : "survey",
-    "id" : 1
-  },
-  "student": {
-    "type" : "student",
-    "id" : 1
-  },
-  "question": {
-    "type" : "question",
-    "id" : 1
-  }
-}
