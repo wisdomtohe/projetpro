@@ -13,18 +13,18 @@ public class Survey extends BaseEntity {
 	public Survey() {
 	}
 
-	public Survey(String libelle, String code, String description, Date validite, List<Course> courses, List<Question> questions) {
+	public Survey(String libelle, String code, String description, List<Course> courses, List<Question> questions) {
 		this.libelle = libelle;
 		this.code = code;
 		this.description = description;
-		this.validite = validite;
 		this.courses = courses;
 		this.questions = questions;
 	}
 
 	String libelle, code, description;
 
-	Date validite;
+	Date beginDate;
+	Date endDate;
 
 	@ManyToMany
 	@JoinTable(
@@ -40,9 +40,9 @@ public class Survey extends BaseEntity {
 	  inverseJoinColumns = @JoinColumn(name = "id_question"))
 	private List<Question> questions;
 
-	@OneToOne(mappedBy = "survey")
+	@OneToMany(mappedBy = "survey")
 	@JsonIgnore
-    private Response response;
+    private List<Response> responses;
 
 	public String getLibelle() {
 		return libelle;
@@ -68,12 +68,20 @@ public class Survey extends BaseEntity {
 		this.description = description;
 	}
 
-	public Date getValidite() {
-		return validite;
+	public Date getBeginDate() {
+		return beginDate;
 	}
 
-	public void setValidite(Date validite) {
-		this.validite = validite;
+	public void setBeginDate(Date beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	public List<Question> getQuestions() {
@@ -84,12 +92,12 @@ public class Survey extends BaseEntity {
 		this.questions = questions;
 	}
 
-	public Response getResponse() {
-		return response;
+	public List<Response> getResponses() {
+		return responses;
 	}
 
-	public void setResponse(Response response) {
-		this.response = response;
+	public void setResponses(List<Response> responses) {
+		this.responses = responses;
 	}
 
 	public List<Course> getCourses() {
