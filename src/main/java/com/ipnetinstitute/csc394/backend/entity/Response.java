@@ -1,11 +1,6 @@
 package com.ipnetinstitute.csc394.backend.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name= "response")
@@ -19,28 +14,22 @@ public class Response extends BaseEntity {
         this.question = question;
     }
 
-    int rating;
+    String comments;
+	Short isNa;
+	Integer rating;
 
-    @OneToOne
-    @JoinColumn(name = "id_survey")
-    private Survey survey;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_survey", nullable = false)
+	private Survey survey;
 
-    @OneToOne
-    @JoinColumn(name = "id_student")
-    private Student student;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_student", nullable = false)
+	private Student student;
 
-    @OneToOne
-    @JoinColumn(name = "id_question")
-    private Question question;
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
-    }
-
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_question", nullable = false)
+	private Question question;
+	
     public Survey getSurvey() {
         return survey;
     }
@@ -63,5 +52,29 @@ public class Response extends BaseEntity {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public Short getIsNa() {
+        return isNa;
+    }
+
+    public void setIsNa(Short isNa) {
+        this.isNa = isNa;
+    }
+
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
     }
 }

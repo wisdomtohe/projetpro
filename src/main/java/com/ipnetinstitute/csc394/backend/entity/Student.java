@@ -3,6 +3,7 @@ package com.ipnetinstitute.csc394.backend.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name="student")
@@ -21,9 +22,9 @@ public class Student extends BaseEntity{
 	@JoinColumn(name="id_classe")
 	private Classe classe;
 
-	@OneToOne(mappedBy = "student")
+	@OneToMany(mappedBy = "student")
 	@JsonIgnore
-    private Response response;
+    private List<Response> responses;
 
 	public String getMatricule() {
 		return matricule;
@@ -49,11 +50,11 @@ public class Student extends BaseEntity{
 		this.classe = classe;
 	}
 
-	public Response getResponse() {
-		return response;
+	public List<Response> getResponses() {
+		return responses;
 	}
 
-	public void setResponse(Response response) {
-		this.response = response;
+	public void setResponses(List<Response> responses) {
+		this.responses = responses;
 	}
 }

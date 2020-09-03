@@ -2,10 +2,7 @@ package com.ipnetinstitute.csc394.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -25,9 +22,9 @@ public class Question  extends BaseEntity{
 	@JsonIgnore
 	private List<Survey> surveys;
 
-	@OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "question")
 	@JsonIgnore
-	private Response response;
+    private List<Response> responses;
 
 	public String getLibelle() {
 		return libelle;
@@ -53,13 +50,11 @@ public class Question  extends BaseEntity{
 		this.surveys = surveys;
 	}
 
-	public Response getResponse() {
-		return response;
+	public List<Response> getResponses() {
+		return responses;
 	}
 
-	public void setResponse(Response response) {
-		this.response = response;
+	public void setResponses(List<Response> responses) {
+		this.responses = responses;
 	}
-
-
 }
