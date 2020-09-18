@@ -1129,6 +1129,12 @@ INNER JOIN user_is_student uis on uis.id_student = st.id and uis.id_user = 1))
 SELECT DISTINCT Sv.* from survey Sv where Sv.id not in (SELECT DISTINCT S.id FROM survey S INNER JOIN course_has_survey CS ON (S.id = CS.id_survey) INNER JOIN survey_has_question CSQ ON (CSQ.id_survey= CS.id_survey) WHERE CSQ.id_question NOT IN (SELECT SS.id_question FROM response SS, student ST, user_is_student uis WHERE ST.id = SS.id_student AND ST.id = uis.id_student and uis.id_user=2) and S.id in ( SELECT DISTINCT s.id from survey s inner join course_has_survey chs on s.id = chs.id_survey INNER JOIN classe_has_course chc on chs.id_course = chc.id_course INNER JOIN student st on st.id_classe = chc.id_classe INNER JOIN user_is_student uis on uis.id_student = st.id and uis.id_user = 2) )
 
 
+select sum(course_survey) as CS, sum(piigo)as PIIGO, sum(doctor_help) as DH,
+sum(ahoe_gnoe) AG, sum(cisco_ise) CI, sum(detection_intrusion) DI, sum(mayaki) MK,
+sum(nessus) as NS, sum(siem) as SIEM, sum(to_ip) as TOIP
+from jpope_answers.
+
+
 
                 for (const key in this.CourseForm.classes) {
                     console.log(key);

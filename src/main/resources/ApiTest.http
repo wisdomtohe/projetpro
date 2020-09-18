@@ -1,5 +1,24 @@
 ###
 
+POST /jpope/save
+Host: localhost:8080
+Content-Type: application/json
+
+{
+  "courseSurvey" : 1,
+  "mayaki" : 1,
+  "ahoeGnoe" : 1,
+  "piigo" : 1,
+  "doctorHelp" : 1,
+  "detectionIntrusion" : 1,
+  "ciscoIse" : 1,
+  "toIp" : 1,
+  "siem" : 1,
+  "nessus" : 1
+}
+
+###
+
 POST /roles/save
 Host: localhost:8080
 Content-Type: application/json
@@ -16,16 +35,16 @@ Content-Type: application/json
 {
   "user": {
      "type" : "user",
-     "firstName": "Kokouvi Lucien",
-  "lastName": "TOHE",
-  "userName": "ktohe",
+     "firstName": "Admin",
+  "lastName": "ADMIN",
+  "userName": "admin",
   "phone": "98133319",
-  "email": "kokouvi.tohe@ipnetinstitute.com",
-  "password": "ktohe",
+  "email": "admin@ipnetinstitute.com",
+  "password": "admin",
     "modBy": 1
 
 },
-"roles" : [{"id": 1}]
+"roles" : [{"id": 3}]
 }
 
 ###

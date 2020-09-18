@@ -8,5 +8,4 @@ import java.util.List;
 @Transactional
 public interface ResponseEntityRepository extends BaseEntityRepository<Response>{
 
-    List<Response> getResponses();
 }
